@@ -1,0 +1,26 @@
+name: CI Tests
+on: [push, pull_request]
+concurrency:
+  group: ${{ github.head_ref }}-${{ github.event }}
+  cancel-in-progress: true
+
+jobs:
+  github-actions-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+          architecture: 'x64'
+      - name: Install pip requirements
+        run: |
+          pip install -U pip
+          pip install pytest black flake8
+      - name: Run linting checks
+        run: |
+          black questions
+          flake8 questions
+      - name: Run tests
+        run: pytest
