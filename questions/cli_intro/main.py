@@ -14,10 +14,41 @@ Optional: Write tests for your cli tool
 Optional: Instead of using sys.argv; Try using the argparse library https://docs.python.org/3/library/argparse.html
 """
 import sys
+from typing import List
 
 
 def main():
-    print(sys.argv)
+    """encryption of program run as module"""
+    args: Dict[str,str] = read_args()
+    results: List[str] = search_file(args["file_path"], args["keyword"])
+    show_results(results)
+
+def read_args():
+    """check for valid CLI arguments amd return them in a dictionary"""
+    if len(sys.argv) != 3:
+        print("usage: python -m cli_imtro.main [file] [keyword]")
+        exit()
+
+    return{
+        "file_path": sys.argv[1],
+        "keyword": sys.argv[2]
+    }
+def search_file(file_path: str, keyword: str):
+    """opens file_path, reads each line,returns a List of line w/keyword"""
+    matches: List[str]= []
+    file_handle = open(file_path,"r",encoding="utf8")
+    for line in file_handle:
+        if keyword in line:
+            matches.append(line)
+    file_handle.close()
+    return matches
+
+def show_results(matches: List [str]):
+    for line in matches:
+        print(line.strip())
+
+    print("Total matches:" + str(len(matches)))
+
 
 
 if __name__ == "__main__":
