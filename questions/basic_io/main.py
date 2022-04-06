@@ -26,39 +26,54 @@ def calculate_sum():
     # Capture user input
     # Challenge: Instead of using two variable `num1` and `num2`
     #            use a list instead
+
+    operation = input('''
+    Please type in the math operation you would like to complete:
+    + for addition
+    - for subtraction
+    * for multiplication
+    / for division
+    ''')
+
+    nums = []
+    
     for i in range(2):
+        print(i)
         nums.append(
             int(input(f"Enter {i+1} number: ")))
+        #import pdb; pdb.set_trace()
+        # print(nums)
+        #print(nums[0],[1])
+        print( nums)
+        x = nums[0]
+        if len(nums) > 1:
+            y = nums[1]
 
-    print('press 1 for Addition \n press 2 for Subtraction \n press 3 for Multiplication \n press 4 for Division')
-    option = int(input("enter your option: "))
-    if option == 1:
-        for n in first:
-            for i in second:
-                result = n+i
-    elif option == 2:
-        for n in first:
-            for i in second:
-                result = n-i
+    
+    if operation == '+':
+        print('{} + {} = '.format(x, y))
+        print(x + y)
 
-    elif option == 3:
-        for n in first:
-            for i in second:
-                result = n*i
+    elif operation == '-':
+        print('{} - {} = '.format(x, y))
+        print(x - y)
 
-    elif option == 4:
-        for n in first:
-            for i in second:
-                result = n/i
+    elif operation == '*':
+        print('{} * {} = '.format(x, y))
+        print(x * y)
+
+    elif operation == '/':
+        print('{} / {} = '.format(x, y))
+        print(x / y)
 
     else:
-        print('Invalid Value')
+        print('You have not typed a valid operator, please run the program again.')
 
 
     # Calculate sum & print out
     # Challenge task: Modify the function to allow users to input
     # what arithmetic operation they'd like to perform.
-    print(result)
+    
 
 # Reading Files and printing out contents
 def print_out_authors():
@@ -67,12 +82,13 @@ def print_out_authors():
     and prints out it's contents
     """
     # Open file objec
+    
     with open('/home/ona/Downloads/Python-Intro/questions/basic_io/authors.txt', 'r') as f:
-        data = f.read()
+        print(f.read())
     #authors_file = open(r'Downloads/Python-Intro/questions/basic_io/authors.txt', 'r')
 
     # Print out contents of the file
-    print(data)
+    #print(data)
 
 
 def collect_names():
@@ -83,23 +99,13 @@ def collect_names():
     # Open output file; use `out.txt`
     # outfile = open(...)
     
-    with open('/home/ona/Downloads/Python-Intro/questions/basic_io/out.txt', 'w') as f:
-        
+    data = []
 
-        name1 = input('enter first name ')
-        
-        name2 = input('enter second name ')
-        
-        name3 = input('enter third name ')
-        
-        data = [name1,name2,name3]
-        for d in data:
-        #finalString = "  ".join(data)
-            f.write(d + '\n')
-    # Collect 3 names from the user and write to file
-    # for name in user_input:
-    #     write_to_file(name)
-
+    outfile = open('/home/ona/Downloads/Python-Intro/questions/basic_io/out.txt','w')
+    for i in range(3):
+        data.append(input(f"{i+1} enter name "))
+    outfile.write('\n'.join(data))
+    print(outfile)
 
 if __name__ == '__main__':
     collect_names()
