@@ -68,7 +68,7 @@ class TicTacToe:
     def play_game(self):
         game_ongoing = True
         while game_ongoing:
-            self.current_round == 1
+            self.current_round += 1
             current_player = self._get_current_user()
             try:
                 user_input= input(f"Player{current_player}, Enter a number between 1 to 9:")
